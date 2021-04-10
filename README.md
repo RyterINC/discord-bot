@@ -1,3 +1,3 @@
-#Python bot for discord
+# Python bot for discord
 
 ## This project is currently under construction
