@@ -1,23 +1,22 @@
 # bot.py
 import os
-import random
 from dotenv import load_dotenv
 from discord.ext import commands
+# import cogs
+from cogs import greetings, util
+
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='!')
 
+bot.add_cog(greetings.Greetings(bot))
+bot.add_cog(util.Utility(bot))
+
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
-@bot.event
-async def on_member_join(member):
-  await member.create_dm()
-  await member.dm_channel(
-      f'Hey {member.name}, you\'re finally awake. Welcome to the Auh! Discord server!'
-  )
 
 bot.run(TOKEN)
