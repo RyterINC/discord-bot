@@ -22,6 +22,7 @@ objs = list(bucket.objects.filter(Prefix=filename))
 intents = discord.Intents.all()
 intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
+template_update = False
 
 bot.add_cog(greetings.Greetings(bot))
 bot.add_cog(util.Utility(bot))
@@ -39,8 +40,20 @@ if any([w.key == filename for w in objs]):
     print("State file exists for " + GUILD + " Discord server...")
     if os.path.isfile(stateFilePath):
         os.remove(stateFilePath)
-
     s3.meta.client.download_file(BUCKET_NAME, filename, stateFilePath)
+    with open(stateFilePath) as s_infile:
+        state_data = json.load(s_infile)
+    with open(templateFilePath) as t_infile:
+        template_data = json.load(t_infile)
+    for key in template_data.keys():
+        if key not in state_data.keys():
+            state_data[key] = []
+            template_update = True
+    if template_update:
+        with open(stateFilePath, 'w') as s_outfile:
+            json.dump(state_data, s_outfile, sort_keys=True, indent=4)
+        s3.meta.client.upload_file(stateFilePath, BUCKET_NAME, filename)
+
 else:
     print("State file does not exist for " + GUILD + " Discord server, creating...")
 
