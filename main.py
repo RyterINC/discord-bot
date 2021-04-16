@@ -1,6 +1,6 @@
-from botocore.exceptions import ClientError
 from cogs import greetings, util, groups
 from discord.ext import commands
+import discord
 from dotenv import load_dotenv
 from shutil import copyfile
 import boto3
@@ -19,12 +19,13 @@ templateFilePath = "./templates/state-template.json"
 s3 = boto3.resource('s3')
 bucket = s3.Bucket(BUCKET_NAME)
 objs = list(bucket.objects.filter(Prefix=filename))
-
-bot = commands.Bot(command_prefix='!')
+intents = discord.Intents.all()
+intents.members = True
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 bot.add_cog(greetings.Greetings(bot))
 bot.add_cog(util.Utility(bot))
-bot.add_cog(groups.Groups(bot, stateFilePath, BUCKET_NAME, filename))
+bot.add_cog(groups.Groups(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
 
 @bot.event
 async def on_ready():
