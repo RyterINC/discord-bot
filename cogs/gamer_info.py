@@ -265,7 +265,7 @@ class GamerInfo(commands.Cog):
         member_id = discord.utils.get(self.bot.get_all_members(), name=s[0], discriminator=s[1]).id
 
         if str(member_id) in data["gamer-info"]:
-            message = "❗**" + member_name + "** Gamer-info❗\n>>> "
+            message = ":video_game: **" + member_name + "** Gamer-info :video_game:\n>>> "
             for key, value in data["gamer-info"][str(member_id)].items():
                 message = message + key + ": " + value + '\n'
 
