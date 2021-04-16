@@ -61,7 +61,7 @@ class Groups(commands.Cog):
 
     @commands.command(name='group_member_add', help='Adds a member to a notification group')
     async def group_member_add(self, ctx, group_name, member_name):
-   
+
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
@@ -87,4 +87,27 @@ class Groups(commands.Cog):
             message = "Member **" + member_name + "** has been added to the **" + group_name + "** notification group!"
             self.s3.meta.client.upload_file(self.stateFilePath, self.BUCKET_NAME, self.filename)
             await ctx.send(message)
-        
+ 
+
+    @commands.command(name='group_member_remove', help='Removes a member from a notification group')
+    async def group_member_remove(self, ctx, group_name, member_name):
+
+        with open(self.stateFilePath) as infile:
+            data = json.load(infile)
+
+        if group_name not in data["groups"]:
+            message = "Group **" + group_name + "** doesn't exist. To view current groups, use command !group_list"
+            await ctx.send(message)
+
+        if member_name not in data["groups"][group_name]:
+            message = "Discord member **" + member_name + "** isn't in group + **" + group_name + "**"
+            await ctx.send(message)
+        else:
+            data["groups"][group_name].remove(member_name)
+            with open(self.stateFilePath, 'w') as outfile:
+                json.dump(data, outfile, sort_keys=True, indent=4)
+            message = "Member **" + member_name + "** has been removed from notification group **" + group_name + "**!"
+            self.s3.meta.client.upload_file(self.stateFilePath, self.BUCKET_NAME, self.filename)
+            await ctx.send(message)
+
+
