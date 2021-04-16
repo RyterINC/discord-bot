@@ -111,3 +111,20 @@ class Groups(commands.Cog):
             await ctx.send(message)
 
 
+    @commands.command(name='group_member_list', help='Lists all members in a notification group')
+    async def group_member_list(self, ctx, group_name):
+        message = "❗Current members in **" + group_name + "** notification group❗\n>>> "
+        with open(self.stateFilePath) as infile:
+            data = json.load(infile)
+
+        if group_name not in data["groups"]:
+            message = "Group **" + group_name + "** doesn't exist. To view current groups, use command !group_list"
+            await ctx.send(message)
+
+        if len(data["groups"][group_name]) == 0:
+            message = "There are no members in the notification group **" + group_name + "**."
+            await ctx.send(message)
+        else:
+            for member in data["groups"][group_name]:
+                message = message + member + '\n'
+            await ctx.send(message)
