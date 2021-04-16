@@ -25,7 +25,7 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 template_update = False
 
 bot.add_cog(greetings.Greetings(bot))
-bot.add_cog(util.Utility(bot))
+bot.add_cog(util.Utility(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
 bot.add_cog(groups.Groups(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
 bot.add_cog(gamer_info.GamerInfo(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
 
