@@ -27,11 +27,11 @@ class Utility(commands.Cog):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
-        if member.id not in data["member-general"].keys():
-            data["member-general"][member.id] = {}
-            data["member-general"][member.id]["koroks"] = 0
+        if str(member.id) not in data["member-general"].keys():
+            data["member-general"][str(member.id)] = {}
+            data["member-general"][str(member.id)]["koroks"] = 0
 
-        data["member-general"][member.id]["koroks"] += 1
+        data["member-general"][str(member.id)]["koroks"] += 1
         with open(self.stateFilePath, 'w') as outfile:
             json.dump(data, outfile, sort_keys=True, indent=4)
         message = "<@" + str(member.id) + ">" + "You received a Korok seed! Yahaha!\n http://gph.is/2Flp8en"
