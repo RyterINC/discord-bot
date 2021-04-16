@@ -52,6 +52,10 @@ class Groups(commands.Cog):
     async def group_list(self, ctx):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
+        if len(data["groups"]) == 0:
+            message = "There are currently no notification groups" 
+            await ctx.send(message)
+            return
         message = '❗Current notification groups❗\n>>> '
         for group in data["groups"].keys():
             message = message + group + '\n'
@@ -60,37 +64,36 @@ class Groups(commands.Cog):
 
 
     @commands.command(name='group_member_add', help='Adds a member to a notification group')
-    async def group_member_add(self, ctx, group_name, member_name):
+    async def group_member_add(self, ctx, group_name, member: discord.Member):
 
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
-        for guild in self.bot.guilds:
-            if guild.name == self.guildName:
-                break
-
         if group_name not in data["groups"]:
             message = "Group **" + group_name + "** doesn't exist. To view current groups, use command !group_list"
             await ctx.send(message)
+            return
 
-        if member_name in data["groups"][group_name]:
-            message = "Discord member **" + member_name + "** is already in group + **" + group_name + "**"
+        if member.id in data["groups"][group_name]:
+            message = "Discord member **" + member.name + "** is already in group + **" + group_name + "**"
             await ctx.send(message)
+            return
 
-        if guild.get_member_named(member_name) == None:
-            message = "**" + member_name + "** is not a member is the **" + self.guildName + "** Discord server."
+        if ctx.guild.get_member(member.id) == None:
+            message = "**" + member.name + "** is not a member in the **" + self.guildName + "** Discord server."
             await ctx.send(message)
+            return
         else:
-            data["groups"][group_name].append(member_name)
+            data["groups"][group_name].append(member.id)
             with open(self.stateFilePath, 'w') as outfile:
                 json.dump(data, outfile, sort_keys=True, indent=4)
-            message = "Member **" + member_name + "** has been added to the **" + group_name + "** notification group!"
+            message = "Member **" + member.name + "** has been added to the **" + group_name + "** notification group!"
             self.s3.meta.client.upload_file(self.stateFilePath, self.BUCKET_NAME, self.filename)
             await ctx.send(message)
  
 
     @commands.command(name='group_member_remove', help='Removes a member from a notification group')
-    async def group_member_remove(self, ctx, group_name, member_name):
+    async def group_member_remove(self, ctx, group_name, member: discord.Member):
 
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
@@ -99,14 +102,14 @@ class Groups(commands.Cog):
             message = "Group **" + group_name + "** doesn't exist. To view current groups, use command !group_list"
             await ctx.send(message)
 
-        if member_name not in data["groups"][group_name]:
-            message = "Discord member **" + member_name + "** isn't in group + **" + group_name + "**"
+        if member.id not in data["groups"][group_name]:
+            message = "Discord member **" + member.name + "** isn't in group + **" + group_name + "**"
             await ctx.send(message)
         else:
-            data["groups"][group_name].remove(member_name)
+            data["groups"][group_name].remove(member.id)
             with open(self.stateFilePath, 'w') as outfile:
                 json.dump(data, outfile, sort_keys=True, indent=4)
-            message = "Member **" + member_name + "** has been removed from notification group **" + group_name + "**!"
+            message = "Member **" + member.name + "** has been removed from notification group **" + group_name + "**!"
             self.s3.meta.client.upload_file(self.stateFilePath, self.BUCKET_NAME, self.filename)
             await ctx.send(message)
 
@@ -119,14 +122,16 @@ class Groups(commands.Cog):
         if group_name not in data["groups"]:
             message = "Group **" + group_name + "** doesn't exist. To view current groups, use command !group_list"
             await ctx.send(message)
+            return
 
         if len(data["groups"][group_name]) == 0:
             message = "There are no members in the notification group **" + group_name + "**."
             await ctx.send(message)
         else:
             message = "❗Current members in **" + group_name + "** notification group❗\n>>> "
-            for member in data["groups"][group_name]:
-                message = message + member + '\n'
+            for m_id in data["groups"][group_name]:
+                member = ctx.guild.get_member(m_id)
+                message = message + member.name + '\n'
             await ctx.send(message)
 
 
@@ -134,10 +139,6 @@ class Groups(commands.Cog):
     async def group_notify(self, ctx, group_name, group_message):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
-
-        for guild in self.bot.guilds:
-            if guild.name == self.guildName:
-                break
 
         if group_name not in data["groups"]:
             message = "Group **" + group_name + "** doesn't exist. To view current groups, use command !group_list"
@@ -147,11 +148,7 @@ class Groups(commands.Cog):
             message = "There are no members in the notification group **" + group_name + "**."
             await ctx.send(message)
         else:
+            message = ":mega: " + group_message + " :mega:\n>>> "
             for member in data["groups"][group_name]:
-                s = member.split("#")
-                member_id = discord.utils.get(self.bot.get_all_members(), name=s[0], discriminator=s[1]).id
-
-            message = "❗" + group_message + "❗\n>>> "
-            for member in data["groups"][group_name]:
-                message = message + "<@" + str(member_id) + ">" + '\n'
+                message = message + "<@" + str(member) + ">" + '\n'
             await ctx.send(message)
