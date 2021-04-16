@@ -1,4 +1,4 @@
-from cogs import greetings, util, groups
+from cogs import greetings, util, groups, gamer_info
 from discord.ext import commands
 import discord
 from dotenv import load_dotenv
@@ -27,6 +27,7 @@ template_update = False
 bot.add_cog(greetings.Greetings(bot))
 bot.add_cog(util.Utility(bot))
 bot.add_cog(groups.Groups(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
+bot.add_cog(gamer_info.GamerInfo(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
 
 @bot.event
 async def on_ready():
@@ -47,7 +48,7 @@ if any([w.key == filename for w in objs]):
         template_data = json.load(t_infile)
     for key in template_data.keys():
         if key not in state_data.keys():
-            state_data[key] = []
+            state_data[key] = {}
             template_update = True
     if template_update:
         with open(stateFilePath, 'w') as s_outfile:
