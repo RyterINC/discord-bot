@@ -50,9 +50,9 @@ class Groups(commands.Cog):
 
     @commands.command(name='group_list', help='List all notification groups')
     async def group_list(self, ctx):
-        message = '❗Current notification groups❗\n>>> '
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
+        message = '❗Current notification groups❗\n>>> '
         for group in data["groups"].keys():
             message = message + group + '\n'
 
@@ -113,7 +113,6 @@ class Groups(commands.Cog):
 
     @commands.command(name='group_member_list', help='Lists all members in a notification group')
     async def group_member_list(self, ctx, group_name):
-        message = "❗Current members in **" + group_name + "** notification group❗\n>>> "
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
@@ -125,6 +124,34 @@ class Groups(commands.Cog):
             message = "There are no members in the notification group **" + group_name + "**."
             await ctx.send(message)
         else:
+            message = "❗Current members in **" + group_name + "** notification group❗\n>>> "
             for member in data["groups"][group_name]:
                 message = message + member + '\n'
+            await ctx.send(message)
+
+
+    @commands.command(name='group_notify', help='Sends a message to all members of a notification group')
+    async def group_notify(self, ctx, group_name, group_message):
+        with open(self.stateFilePath) as infile:
+            data = json.load(infile)
+
+        for guild in self.bot.guilds:
+            if guild.name == self.guildName:
+                break
+
+        if group_name not in data["groups"]:
+            message = "Group **" + group_name + "** doesn't exist. To view current groups, use command !group_list"
+            await ctx.send(message)
+
+        if len(data["groups"][group_name]) == 0:
+            message = "There are no members in the notification group **" + group_name + "**."
+            await ctx.send(message)
+        else:
+            for member in data["groups"][group_name]:
+                s = member.split("#")
+                member_id = discord.utils.get(self.bot.get_all_members(), name=s[0], discriminator=s[1]).id
+
+            message = "❗" + group_message + "❗\n>>> "
+            for member in data["groups"][group_name]:
+                message = message + "<@" + str(member_id) + ">" + '\n'
             await ctx.send(message)
