@@ -1,6 +1,8 @@
-app/popo
-app/.env
+popo
+.env
+.env-gunny
 app/cogs/__pycache__
 app/state
-app/buildcommands.sh
+buildcommands.sh
 .DS_Store
+run-compose.sh

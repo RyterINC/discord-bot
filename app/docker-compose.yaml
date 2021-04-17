@@ -1,4 +1,0 @@
-version: "3.9"
-services:
-  discordbot:
-    image: "ryterinc/discordbot:1.1"
