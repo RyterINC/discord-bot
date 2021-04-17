@@ -13,7 +13,7 @@ class Utility(commands.Cog):
         self.s3 = boto3.resource('s3')
         self.guildName = GUILD
 
-    @commands.command(name='roll_dice', help='Rolls X dice with Y sides')
+    @commands.command(name='roll.dice', help='Rolls X dice with Y sides')
     async def roll(self, ctx, number_of_dice: int, number_of_sides: int):
         dice = [
             str(random.choice(range(1, number_of_sides + 1)))
@@ -22,7 +22,7 @@ class Utility(commands.Cog):
         await ctx.send(', '.join(dice))
 
 
-    @commands.command(name='give_korok_seed', help='Give a member a Korok seed! (Karma points)')
+    @commands.command(name='give.korok.seeds', help='Give a member a Korok seed! (Karma points)')
     async def give_korok_seed(self, ctx, member: discord.Member):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
@@ -39,7 +39,7 @@ class Utility(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='list_korok_seeds', help='Find out how many korok seeds a member has')
+    @commands.command(name='list.korok.seeds', help='Find out how many korok seeds a member has')
     async def list_korok_seeds(self, ctx, member: discord.Member):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)

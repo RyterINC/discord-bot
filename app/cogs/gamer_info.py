@@ -20,8 +20,8 @@ class GamerInfo(commands.Cog):
         return invalid_channel
 
 
-    @commands.command(name='twitch_set', help='Update gamer info with Twitch username')
-    async def twitch_set(self, ctx, username):
+    @commands.command(name='twitch', help='Update gamer info with Twitch username')
+    async def twitch(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
             message = ("You can only run gamer-info commands in the #gamer-info channel")
@@ -43,7 +43,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='psn_set', help='Update gamer info with PSN username')
+    @commands.command(name='psn', help='Update gamer info with PSN username')
     async def psn_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -66,7 +66,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='switch_set', help='Update gamer info with Switch username')
+    @commands.command(name='switch', help='Update gamer info with Switch username')
     async def switch_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -89,7 +89,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='steam_set', help='Update gamer info with Steam username')
+    @commands.command(name='steam', help='Update gamer info with Steam username')
     async def steam_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -112,7 +112,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='switch_friend_code_set', help='Update gamer info with Switch friend code')
+    @commands.command(name='switch.friendcode', help='Update gamer info with Switch friend code')
     async def switch_friend_code_set(self, ctx, friend_code):
         result = self.channel_check(ctx)
         if result:
@@ -135,7 +135,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='xbox_set', help='Update gamer info with Xbox username')
+    @commands.command(name='xbox', help='Update gamer info with Xbox username')
     async def xbox_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -158,7 +158,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='battlenet_set', help='Update gamer info with Battle.net username')
+    @commands.command(name='battlenet', help='Update gamer info with Battle.net username')
     async def battlenet_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -181,7 +181,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='origin_set', help='Update gamer info with Origin username')
+    @commands.command(name='origin', help='Update gamer info with Origin username')
     async def origin_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -204,7 +204,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='epic_set', help='Update gamer info with Epic username')
+    @commands.command(name='epic', help='Update gamer info with Epic username')
     async def epic_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -227,7 +227,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='rockstar_set', help='Update gamer info with RockStar username')
+    @commands.command(name='rockstar', help='Update gamer info with RockStar username')
     async def rockstar_set(self, ctx, username):
         result = self.channel_check(ctx)
         if result:
@@ -250,7 +250,7 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='gamer_info_get', help='Lists the gamer-info for a Discord member')
+    @commands.command(name='gamer.info.get', help='Lists the gamer-info for a Discord member')
     async def gamer_info_get(self, ctx, member: discord.Member):
         result = self.channel_check(ctx)
         if result:

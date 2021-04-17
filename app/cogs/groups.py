@@ -14,7 +14,7 @@ class Groups(commands.Cog):
         self.guildName = GUILD
 
 
-    @commands.command(name='group_create', help='Creates a notification group')
+    @commands.command(name='group.create', help='Creates a notification group')
     async def group_create(self, ctx, group_name):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
@@ -31,7 +31,7 @@ class Groups(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='group_delete', help='Deletes a notification group')
+    @commands.command(name='group.delete', help='Deletes a notification group')
     async def group_delete(self, ctx, group_name):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
@@ -48,7 +48,7 @@ class Groups(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='group_list', help='List all notification groups')
+    @commands.command(name='group.list', help='List all notification groups')
     async def group_list(self, ctx):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
@@ -63,7 +63,7 @@ class Groups(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='group_member_add', help='Adds a member to a notification group')
+    @commands.command(name='group.member.add', help='Adds a member to a notification group')
     async def group_member_add(self, ctx, group_name, member: discord.Member):
 
         with open(self.stateFilePath) as infile:
@@ -92,7 +92,7 @@ class Groups(commands.Cog):
             await ctx.send(message)
  
 
-    @commands.command(name='group_member_remove', help='Removes a member from a notification group')
+    @commands.command(name='group.member.remove', help='Removes a member from a notification group')
     async def group_member_remove(self, ctx, group_name, member: discord.Member):
 
         with open(self.stateFilePath) as infile:
@@ -114,7 +114,7 @@ class Groups(commands.Cog):
             await ctx.send(message)
 
 
-    @commands.command(name='group_member_list', help='Lists all members in a notification group')
+    @commands.command(name='group.member.list', help='Lists all members in a notification group')
     async def group_member_list(self, ctx, group_name):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
@@ -135,7 +135,7 @@ class Groups(commands.Cog):
             await ctx.send(message)
 
 
-    @commands.command(name='group_notify', help='Sends a message to all members of a notification group - EX: !group_notify smash "Let\'s play some smash!"')
+    @commands.command(name='group.notify', help='Sends a message to all members of a notification group - EX: !group_notify smash "Let\'s play some smash!"')
     async def group_notify(self, ctx, group_name, group_message):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
