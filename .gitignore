@@ -1,4 +1,4 @@
-popo
-.env
-cogs/__pycache__
-state
+app/popo
+app/.env
+app/cogs/__pycache__
+app/state
