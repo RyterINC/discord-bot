@@ -33,7 +33,6 @@ bot.add_cog(gamer_info.GamerInfo(bot, stateFilePath, BUCKET_NAME, filename, GUIL
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
-
 if os.path.isdir(path) == False:
     os.mkdir("./state")
 
