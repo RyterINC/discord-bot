@@ -262,7 +262,7 @@ class GamerInfo(commands.Cog):
             data = json.load(infile)
 
         if str(member.id) in data["gamer-info"]:
-            message = ":video_game: **" + member_name + "** Gamer-info :video_game:\n>>> "
+            message = ":video_game: **" + member.name + "** Gamer-info :video_game:\n>>> "
             for key, value in data["gamer-info"][str(member.id)].items():
                 message = message + key + ": " + value + '\n'
 
