@@ -148,7 +148,7 @@ class Groups(commands.Cog):
             message = "There are no members in the notification group **" + group_name + "**."
             await ctx.send(message)
         else:
-            message = ":mega: " + group_message + " :mega:\n>>> "
+            message = ":mega: " + group_message + " :mega:\n"
             for member in data["groups"][group_name]:
-                message = message + "<@" + str(member) + ">" + '\n'
+                message = message + "<@" + str(member) + "> "
             await ctx.send(message)
