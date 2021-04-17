@@ -2,3 +2,5 @@ app/popo
 app/.env
 app/cogs/__pycache__
 app/state
+app/buildcommands.sh
+.DS_Store

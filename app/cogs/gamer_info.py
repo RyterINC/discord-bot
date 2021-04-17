@@ -251,7 +251,7 @@ class GamerInfo(commands.Cog):
 
 
     @commands.command(name='gamer_info_get', help='Lists the gamer-info for a Discord member')
-    async def gamer_info_get(self, ctx, member_name):
+    async def gamer_info_get(self, ctx, member: discord.Member):
         result = self.channel_check(ctx)
         if result:
             message = ("You can only run gamer-info commands in the #gamer-info channel")
@@ -261,12 +261,9 @@ class GamerInfo(commands.Cog):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
-        s = member_name.split("#")
-        member_id = discord.utils.get(self.bot.get_all_members(), name=s[0], discriminator=s[1]).id
-
-        if str(member_id) in data["gamer-info"]:
+        if str(member.id) in data["gamer-info"]:
             message = ":video_game: **" + member_name + "** Gamer-info :video_game:\n>>> "
-            for key, value in data["gamer-info"][str(member_id)].items():
+            for key, value in data["gamer-info"][str(member.id)].items():
                 message = message + key + ": " + value + '\n'
 
         await ctx.send(message)
