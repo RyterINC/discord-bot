@@ -135,7 +135,7 @@ class Groups(commands.Cog):
             await ctx.send(message)
 
 
-    @commands.command(name='group.notify', help='Sends a message to all members of a notification group - EX: !group_notify smash "Let\'s play some smash!"')
+    @commands.command(name='notify', help='Sends a message to all members of a notification group - EX: !group_notify smash "Let\'s play some smash!"')
     async def group_notify(self, ctx, group_name, group_message):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)

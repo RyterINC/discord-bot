@@ -22,8 +22,8 @@ class Utility(commands.Cog):
         await ctx.send(', '.join(dice))
 
 
-    @commands.command(name='give.korok.seeds', help='Give a member a Korok seed! (Karma points)')
-    async def give_korok_seed(self, ctx, member: discord.Member):
+    @commands.command(name='give.koroks', help='Give a member a Korok seed! (Karma points)')
+    async def give_koroks(self, ctx, member: discord.Member):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
@@ -34,13 +34,13 @@ class Utility(commands.Cog):
         data["member-general"][str(member.id)]["koroks"] += 1
         with open(self.stateFilePath, 'w') as outfile:
             json.dump(data, outfile, sort_keys=True, indent=4)
-        message = "<@" + str(member.id) + ">" + "You received a Korok seed! Yahaha!\n http://gph.is/2Flp8en"
+        message = "<@" + str(member.id) + ">" + " You received a Korok seed from " + ctx.message.author.name + "! Yahaha!\n http://gph.is/2Flp8en"
         self.s3.meta.client.upload_file(self.stateFilePath, self.BUCKET_NAME, self.filename)           
         await ctx.send(message)
 
 
-    @commands.command(name='list.korok.seeds', help='Find out how many korok seeds a member has')
-    async def list_korok_seeds(self, ctx, member: discord.Member):
+    @commands.command(name='list.koroks', help='Find out how many korok seeds a member has')
+    async def list_koroks(self, ctx, member: discord.Member):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
