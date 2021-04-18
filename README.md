@@ -51,7 +51,7 @@ Karma system in order to give users "Korok seeds" as a reward. Users can look up
 
 ## Installation
 
-Clone this repo and install the docker container using `docker-compose.yaml`
+Copy the docker-compose file and run on a server using `docker-compose.yaml`
 
 `docker-compose up -d --build`
 
