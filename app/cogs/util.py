@@ -34,7 +34,8 @@ class Utility(commands.Cog):
         data["member-general"][str(member.id)]["koroks"] += 1
         with open(self.stateFilePath, 'w') as outfile:
             json.dump(data, outfile, sort_keys=True, indent=4)
-        message = "<@" + str(member.id) + ">" + " You received a Korok seed from " + ctx.message.author.name + "! Yahaha!\n http://gph.is/2Flp8en"
+        total = data["member-general"][str(member.id)]["koroks"]
+        message = "<@" + str(member.id) + ">" + " You received a Korok seed from " + ctx.message.author.name + "! Yahaha! You have **" + str(total) + "** Korok seeds" + "\n http://gph.is/2Flp8en"
         self.s3.meta.client.upload_file(self.stateFilePath, self.BUCKET_NAME, self.filename)           
         await ctx.send(message)
 
