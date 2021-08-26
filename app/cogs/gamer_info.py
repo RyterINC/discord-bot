@@ -250,14 +250,8 @@ class GamerInfo(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='gamer.info.get', help='Lists the gamer-info for a Discord member')
+    @commands.command(name='gamer.info', help='Lists the gamer-info for a Discord member')
     async def gamer_info_get(self, ctx, member: discord.Member):
-        result = self.channel_check(ctx)
-        if result:
-            message = ("You can only run gamer-info commands in the #gamer-info channel")
-            await ctx.send(message)
-            return
-
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
