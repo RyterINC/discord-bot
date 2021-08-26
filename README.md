@@ -12,29 +12,34 @@ Current features include the following:
 
 ```
 GamerInfo:
-  battlenet           Update gamer info with Battle.net username
-  epic                Update gamer info with Epic username
-  gamer.info.get      Lists the gamer-info for a Discord member
-  origin              Update gamer info with Origin username
-  psn                 Update gamer info with PSN username
-  rockstar            Update gamer info with RockStar username
-  steam               Update gamer info with Steam username
-  switch              Update gamer info with Switch username
-  switch.friendcode   Update gamer info with Switch friend code
-  twitch              Update gamer info with Twitch username
-  xbox                Update gamer info with Xbox username
+  battlenet         Update gamer info with Battle.net username
+  epic              Update gamer info with Epic username
+  gamer.info        Lists the gamer-info for a Discord member
+  origin            Update gamer info with Origin username
+  psn               Update gamer info with PSN username
+  rockstar          Update gamer info with RockStar username
+  steam             Update gamer info with Steam username
+  switch            Update gamer info with Switch username
+  switch.friendcode Update gamer info with Switch friend code
+  twitch            Update gamer info with Twitch username
+  xbox              Update gamer info with Xbox username
 Groups:
-  group.create        Creates a notification group
-  group.delete        Deletes a notification group
-  group.list          List all notification groups
-  group.member.add    Adds a member to a notification group
-  group.member.list   Lists all members in a notification group
-  group.member.remove Removes a member from a notification group
-  notify              Sends a message to all members of a notification group ...
+  group.create      Creates a notification group
+  group.delete      Deletes a notification group
+  group.list        List all notification groups
+  member.add        Adds a member to a notification group
+  member.list       Lists all members in a notification group
+  member.remove     Removes a member from a notification group
+  notify            Sends a message to all members of a notification group - ...
 Utility:
-  give.nuts           Give a member a Kupo nut! (Karma points)
-  list.nuts           Find out how many Kupo nuts a member has
-  roll.dice           Rolls X dice with Y sides
+  give.nuts         Give a member a kupo nut! (Karma points)
+  list.nuts         Find out how many kupo nuts a member has
+  roll.dice         Rolls X dice with Y sides
+No Category:
+  help              Shows this message
+
+Type !help command for more info on a command.
+You can also type !help category for more info on a category.
 ```
 
 ### GamerInfo
