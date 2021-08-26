@@ -63,7 +63,7 @@ class Groups(commands.Cog):
         await ctx.send(message)
 
 
-    @commands.command(name='group.member.add', help='Adds a member to a notification group')
+    @commands.command(name='member.add', help='Adds a member to a notification group')
     async def group_member_add(self, ctx, group_name, member: discord.Member):
 
         with open(self.stateFilePath) as infile:
@@ -92,7 +92,7 @@ class Groups(commands.Cog):
             await ctx.send(message)
  
 
-    @commands.command(name='group.member.remove', help='Removes a member from a notification group')
+    @commands.command(name='member.remove', help='Removes a member from a notification group')
     async def group_member_remove(self, ctx, group_name, member: discord.Member):
 
         with open(self.stateFilePath) as infile:
@@ -114,7 +114,7 @@ class Groups(commands.Cog):
             await ctx.send(message)
 
 
-    @commands.command(name='group.member.list', help='Lists all members in a notification group')
+    @commands.command(name='member.list', help='Lists all members in a notification group')
     async def group_member_list(self, ctx, group_name):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
@@ -135,8 +135,8 @@ class Groups(commands.Cog):
             await ctx.send(message)
 
 
-    @commands.command(name='notify', help='Sends a message to all members of a notification group - EX: !group_notify smash "Let\'s play some smash!"')
-    async def group_notify(self, ctx, group_name, group_message):
+    @commands.command(name='notify', help='Sends a message to all members of a notification group - EX: !group_notify raid-one')
+    async def group_notify(self, ctx, group_name):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
@@ -148,7 +148,7 @@ class Groups(commands.Cog):
             message = "There are no members in the notification group **" + group_name + "**."
             await ctx.send(message)
         else:
-            message = ":mega: " + group_message + " :mega:\n"
+            message = ":mega:\n"
             for member in data["groups"][group_name]:
                 message = message + "<@" + str(member) + "> "
             await ctx.send(message)
