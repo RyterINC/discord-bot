@@ -1,6 +1,6 @@
 # Python bot for discord
 
-This is a custom discord bot built mainly for the `!Auh` discord server. 
+This is a custom discord bot built mainly for the `No Commitment` discord server. 
 
 This bot is dockerized, and will easily run on a t2.nano which allows for a cheap run cost. 
 
@@ -32,8 +32,8 @@ Groups:
   group.member.remove Removes a member from a notification group
   notify              Sends a message to all members of a notification group ...
 Utility:
-  give.koroks         Give a member a Korok seed! (Karma points)
-  list.koroks         Find out how many korok seeds a member has
+  give.nuts           Give a member a Kupo nut! (Karma points)
+  list.nuts           Find out how many Kupo nuts a member has
   roll.dice           Rolls X dice with Y sides
 ```
 
@@ -47,7 +47,7 @@ Functionality to support creating groups, and adding members to groups in order 
 
 ### Koroks
 
-Karma system in order to give users "Korok seeds" as a reward. Users can look up how many Korok seeds he / she has obtained. 
+Karma system in order to give users "Kupo nuts" as a reward. Users can look up how many Kupo nuts he / she has obtained. 
 
 ## Installation
 

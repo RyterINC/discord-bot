@@ -22,35 +22,35 @@ class Utility(commands.Cog):
         await ctx.send(', '.join(dice))
 
 
-    @commands.command(name='give.koroks', help='Give a member a Korok seed! (Karma points)')
-    async def give_koroks(self, ctx, member: discord.Member):
+    @commands.command(name='give.nuts', help='Give a member a kupo nut! (Karma points)')
+    async def give_nuts(self, ctx, member: discord.Member):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
         if str(member.id) not in data["member-general"].keys():
             data["member-general"][str(member.id)] = {}
-            data["member-general"][str(member.id)]["koroks"] = 0
+            data["member-general"][str(member.id)]["nuts"] = 0
 
-        data["member-general"][str(member.id)]["koroks"] += 1
+        data["member-general"][str(member.id)]["nuts"] += 1
         with open(self.stateFilePath, 'w') as outfile:
             json.dump(data, outfile, sort_keys=True, indent=4)
-        total = data["member-general"][str(member.id)]["koroks"]
-        message = "<@" + str(member.id) + ">" + " You received a Korok seed from " + ctx.message.author.name + "! Yahaha! You have **" + str(total) + "** Korok seeds" + "\n http://gph.is/2Flp8en"
+        total = data["member-general"][str(member.id)]["nuts"]
+        message = "<@" + str(member.id) + ">" + " You received a kupo nut from " + ctx.message.author.name + "! You have **" + str(total) + "** kupo nuts!"
         self.s3.meta.client.upload_file(self.stateFilePath, self.BUCKET_NAME, self.filename)           
         await ctx.send(message)
 
 
-    @commands.command(name='list.koroks', help='Find out how many korok seeds a member has')
-    async def list_koroks(self, ctx, member: discord.Member):
+    @commands.command(name='list.nuts', help='Find out how many kupo nuts a member has')
+    async def list_nuts(self, ctx, member: discord.Member):
         with open(self.stateFilePath) as infile:
             data = json.load(infile)
 
         if str(member.id) not in data["member-general"].keys():
             data["member-general"][str(member.id)] = {}
-            data["member-general"][str(member.id)]["koroks"] = 0
-            message = "<@" + str(member.id) + ">" + " has **0** korok seeds. Why don't you give them a seed you monster."
+            data["member-general"][str(member.id)]["nuts"] = 0
+            message = "<@" + str(member.id) + ">" + " has **0** kupo nuts. Be the first to give them a kupo nut, kupo!."
             await ctx.send(message)
         else:
-            total = data["member-general"][str(member.id)]["koroks"]
-            message = "<@" + str(member.id) + ">" + " has **" + str(total) + "** korok seeds"
+            total = data["member-general"][str(member.id)]["nuts"]
+            message = "<@" + str(member.id) + ">" + " has **" + str(total) + "** kupo nuts"
             await ctx.send(message)

@@ -1,6 +1,6 @@
 version: "3.3"
 services:
   discordbot:
-    image: "ryterinc/discordbot:1.6"
+    image: "ryterinc/discordbot:1.7"
     env_file:
       - .env
