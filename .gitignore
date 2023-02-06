@@ -1,6 +1,5 @@
 popo
-.env
-.env-gunny
+.env*
 app/cogs/__pycache__
 app/state
 buildcommands.sh

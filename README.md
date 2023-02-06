@@ -1,6 +1,6 @@
 # Python bot for discord
 
-This is a custom discord bot built mainly for the `No Commitment` discord server. 
+This is a custom discord bot built mainly for the `No !Auh` variety gaming discord server.
 
 This bot is dockerized, and will easily run on a t2.nano which allows for a cheap run cost. 
 
@@ -32,8 +32,8 @@ Groups:
   member.remove     Removes a member from a notification group
   notify            Sends a message to all members of a notification group - ...
 Utility:
-  give.nuts         Give a member a kupo nut! (Karma points)
-  list.nuts         Find out how many kupo nuts a member has
+  give.koroks         Give a member a Korok seed! (Karma points)
+  list.koroks         Find out how many Korok seeds a member has
   roll.dice         Rolls X dice with Y sides
 No Category:
   help              Shows this message
@@ -44,7 +44,7 @@ You can also type !help category for more info on a category.
 
 ### GamerInfo
 
-This allows users to set usernames or gamer tags for the supported game clients or consoles. Users can then use `!gamer.info.get @userMention` to retrieve the settings a member has stored. 
+This allows users to set usernames or gamer tags for the supported game clients or consoles. Users can then use `!gamer.info @userMention` to retrieve the settings a member has stored. 
 
 ### Groups
 
@@ -52,7 +52,7 @@ Functionality to support creating groups, and adding members to groups in order 
 
 ### Koroks
 
-Karma system in order to give users "Kupo nuts" as a reward. Users can look up how many Kupo nuts he / she has obtained. 
+Karma system in order to give users "Korok seeds" as a reward. Users can look up how many Korok seeds he / she has obtained. 
 
 ## Installation
 
