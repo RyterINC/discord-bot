@@ -1,4 +1,4 @@
-from cogs import greetings, util, groups, gamer_info
+from cogs import util, groups, gamer_info
 from discord.ext import commands
 import discord
 from dotenv import load_dotenv
@@ -24,13 +24,12 @@ intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 template_update = False
 
-bot.add_cog(greetings.Greetings(bot))
-bot.add_cog(util.Utility(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
-bot.add_cog(groups.Groups(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
-bot.add_cog(gamer_info.GamerInfo(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
 
 @bot.event
 async def on_ready():
+    await bot.add_cog(util.Utility(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
+    await bot.add_cog(groups.Groups(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
+    await bot.add_cog(gamer_info.GamerInfo(bot, stateFilePath, BUCKET_NAME, filename, GUILD))
     print(f'{bot.user.name} has connected to Discord!')
 
 if os.path.isdir(path) == False:
